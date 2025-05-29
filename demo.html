@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>大数据项目组介绍</title>
+    <!-- Element Plus CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/element-plus/dist/index.css" />
+    <!-- Vue 3 -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <!-- Element Plus JS -->
+    <script src="https://unpkg.com/element-plus/dist/index.full.js"></script>
+    <!-- Element Plus Icons -->
+    <script src="https://unpkg.com/@element-plus/icons-vue/dist/index.iife.js"></script>
+    <style>
+        :root {
+            --primary-color: #409eff;
+            --success-color: #67c23a;
+            --warning-color: #e6a23c;
+            --danger-color: #f56c6c;
+            --info-color: #909399;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Helvetica, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', '微软雅黑', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .app-container {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .hero-section {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.9) 0%, rgba(118, 75, 162, 0.9) 100%);
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            color: white;
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+
+        .hero-buttons {
+            animation: fadeInUp 1s ease-out 0.6s both;
+        }
+
+        .main-content {
+            background: white;
+            position: relative;
+            z-index: 3;
+            border-radius: 20px 20px 0 0;
+            margin-top: -20px;
+            padding: 3rem 0;
+        }
+
+        .section-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .floating-elements {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .floating-element {
+            position: absolute;
+            opacity: 0.1;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .floating-element:nth-child(1) {
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .floating-element:nth-child(2) {
+            top: 60%;
+            right: 10%;
+            animation-delay: 2s;
+        }
+
+        .floating-element:nth-child(3) {
+            bottom: 30%;
+            left: 20%;
+            animation-delay: 4s;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        .feature-card {
+            transition: all 0.3s ease;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .tech-timeline {
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .timeline-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .timeline-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 2rem;
+            z-index: 2;
+        }
+
+        .gallery-card {
+            overflow: hidden;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .gallery-card:hover {
+            transform: scale(1.05);
+        }
+
+        .stats-card {
+            text-align: center;
+            padding: 2rem;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .stats-number {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 4rem 0;
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .section-container {
+                padding: 0 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div class="app-container">
+            <!-- 英雄区域 -->
+            <section class="hero-section">
+                <div class="hero-bg"></div>
+                <div class="floating-elements">
+                    <el-icon class="floating-element" size="60"><cpu-icon /></el-icon>
+                    <el-icon class="floating-element" size="80"><data-analysis-icon /></el-icon>
+                    <el-icon class="floating-element" size="70"><connection-icon /></el-icon>
+                </div>
+                <div class="hero-content">
+                    <h1 class="hero-title">大数据项目组</h1>
+                    <p class="hero-subtitle">从服务外包到技术前沿的华丽蜕变</p>
+                    <div class="hero-buttons">
+                        <el-button type="primary" size="large" @click="scrollToSection('about')" round>
+                            <el-icon><arrow-down-icon /></el-icon>
+                            了解更多
+                        </el-button>
+                        <el-button type="success" size="large" @click="scrollToSection('join')" round>
+                            <el-icon><user-icon /></el-icon>
+                            立即加入
+                        </el-button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 主要内容 -->
+            <div class="main-content">
+                <!-- 统计数据 -->
+                <section class="section-container" style="margin-bottom: 3rem;">
+                    <el-row :gutter="24">
+                        <el-col :xs="12" :sm="6" v-for="stat in stats" :key="stat.title">
+                            <div class="stats-card">
+                                <div class="stats-number">{{ stat.number }}</div>
+                                <div>{{ stat.title }}</div>
+                            </div>
+                        </el-col>
+                    </el-row>
+                </section>
+
+                <!-- 关于我们 -->
+                <section id="about" class="section-container" style="margin-bottom: 4rem;">
+                    <el-card class="feature-card">
+                        <template #header>
+                            <div style="display: flex; align-items: center;">
+                                <el-icon size="24" color="#409eff"><info-filled-icon /></el-icon>
+                                <span style="margin-left: 8px; font-size: 1.5rem; font-weight: bold;">项目组起源与发展</span>
+                            </div>
+                        </template>
+                        <el-alert
+                            title="项目组演进历程"
+                            type="info"
+                            :closable="false"
+                            show-icon>
+                            <p style="margin-top: 10px; line-height: 1.6;">
+                                大数据项目组的起源可以追溯到服务外包项目组，随着时代的变迁和项目组的不断发展，
+                                其特色逐渐丰富，最终演变为现今的大数据项目组。我们致力于前沿技术研究与实际应用的完美结合。
+                            </p>
+                        </el-alert>
+                    </el-card>
+                </section>
+
+                <!-- 技术体系 -->
+                <section class="section-container" style="margin-bottom: 4rem;">
+                    <el-card class="feature-card">
+                        <template #header>
+                            <div style="display: flex; align-items: center;">
+                                <el-icon size="24" color="#67c23a"><cpu-icon /></el-icon>
+                                <span style="margin-left: 8px; font-size: 1.5rem; font-weight: bold;">核心技术体系</span>
+                            </div>
+                        </template>
+                        <div class="tech-timeline">
+                            <el-timeline>
+                                <el-timeline-item
+                                    v-for="tech in technologies"
+                                    :key="tech.name"
+                                    :icon="tech.icon"
+                                    :type="tech.type"
+                                    :color="tech.color"
+                                    :size="tech.size">
+                                    <el-card>
+                                        <h3>{{ tech.name }}</h3>
+                                        <p style="color: #666; margin-top: 8px;">{{ tech.description }}</p>
+                                        <el-tag :type="tech.tagType" style="margin-top: 10px;">{{ tech.level }}</el-tag>
+                                    </el-card>
+                                </el-timeline-item>
+                            </el-timeline>
+                        </div>
+                    </el-card>
+                </section>
+
+                <!-- 应用领域 -->
+                <section class="section-container" style="margin-bottom: 4rem;">
+                    <el-card class="feature-card">
+                        <template #header>
+                            <div style="display: flex; align-items: center;">
+                                <el-icon size="24" color="#e6a23c"><connection-icon /></el-icon>
+                                <span style="margin-left: 8px; font-size: 1.5rem; font-weight: bold;">应用领域与价值</span>
+                            </div>
+                        </template>
+                        <el-tabs v-model="activeTab" type="card">
+                            <el-tab-pane label="电子商务" name="ecommerce">
+                                <el-descriptions :column="2" border>
+                                    <el-descriptions-item label="用户画像">精准用户行为分析</el-descriptions-item>
+                                    <el-descriptions-item label="销量预测">AI驱动的销量预测模型</el-descriptions-item>
+                                    <el-descriptions-item label="智能营销">个性化推荐系统</el-descriptions-item>
+                                    <el-descriptions-item label="库存优化">智能库存管理系统</el-descriptions-item>
+                                </el-descriptions>
+                            </el-tab-pane>
+                            <el-tab-pane label="O2O 服务" name="o2o">
+                                <el-descriptions :column="2" border>
+                                    <el-descriptions-item label="位置服务">基于LBS的精准服务</el-descriptions-item>
+                                    <el-descriptions-item label="需求预测">实时需求分析与预测</el-descriptions-item>
+                                    <el-descriptions-item label="服务优化">服务质量智能评估</el-descriptions-item>
+                                    <el-descriptions-item label="用户体验">全链路用户体验优化</el-descriptions-item>
+                                </el-descriptions>
+                            </el-tab-pane>
+                            <el-tab-pane label="物流配送" name="logistics">
+                                <el-descriptions :column="2" border>
+                                    <el-descriptions-item label="路径优化">智能路径规划算法</el-descriptions-item>
+                                    <el-descriptions-item label="运力调度">动态运力调度系统</el-descriptions-item>
+                                    <el-descriptions-item label="成本控制">配送成本优化模型</el-descriptions-item>
+                                    <el-descriptions-item label="实时追踪">全程可视化追踪系统</el-descriptions-item>
+                                </el-descriptions>
+                            </el-tab-pane>
+                        </el-tabs>
+                    </el-card>
+                </section>
+
+                <!-- 项目成果展示 -->
+                <section class="section-container" style="margin-bottom: 4rem;">
+                    <el-card class="feature-card">
+                        <template #header>
+                            <div style="display: flex; align-items: center; justify-content: space-between;">
+                                <div style="display: flex; align-items: center;">
+                                    <el-icon size="24" color="#f56c6c"><picture-icon /></el-icon>
+                                    <span style="margin-left: 8px; font-size: 1.5rem; font-weight: bold;">项目成果与团队风采</span>
+                                </div>
+                                <el-button-group>
+                                    <el-button 
+                                        v-for="filter in imageFilters" 
+                                        :key="filter.key"
+                                        :type="activeFilter === filter.key ? 'primary' : 'default'"
+                                        @click="activeFilter = filter.key"
+                                        size="small">
+                                        {{ filter.label }}
+                                    </el-button>
+                                </el-button-group>
+                            </div>
+                        </template>
+                        <el-row :gutter="16">
+                            <el-col 
+                                :xs="24" :sm="12" :md="6" 
+                                v-for="image in filteredImages" 
+                                :key="image.id"
+                                style="margin-bottom: 16px;">
+                                <el-card class="gallery-card" :body-style="{ padding: '0px' }" @click="openLightbox(image)">
+                                    <img :src="image.src" :alt="image.alt" style="width: 100%; height: 200px; object-fit: cover;">
+                                    <div style="padding: 14px;">
+                                        <span>{{ image.caption }}</span>
+                                        <div style="margin-top: 8px;">
+                                            <el-tag :type="image.tagType" size="small">{{ image.category }}</el-tag>
+                                        </div>
+                                    </div>
+                                </el-card>
+                            </el-col>
+                        </el-row>
+                    </el-card>
+                </section>
+
+                <!-- 核心优势 -->
+                <section class="section-container" style="margin-bottom: 4rem;">
+                    <h2 style="text-align: center; margin-bottom: 2rem; font-size: 2rem;">核心优势</h2>
+                    <el-row :gutter="24">
+                        <el-col :xs="24" :md="8" v-for="advantage in advantages" :key="advantage.title">
+                            <el-card class="feature-card" style="height: 100%; margin-bottom: 1rem;">
+                                <div style="text-align: center;">
+                                    <el-avatar :size="80" :style="`background-color: ${advantage.color}`">
+                                        <el-icon size="40"><component :is="advantage.icon" /></el-icon>
+                                    </el-avatar>
+                                    <h3 style="margin: 1rem 0; color: #303133;">{{ advantage.title }}</h3>
+                                    <p style="color: #606266; line-height: 1.6;">{{ advantage.description }}</p>
+                                    <el-progress 
+                                        :percentage="advantage.progress" 
+                                        :color="advantage.color"
+                                        style="margin-top: 1rem;">
+                                    </el-progress>
+                                </div>
+                            </el-card>
+                        </el-col>
+                    </el-row>
+                </section>
+
+                <!-- 加入我们 -->
+                <section id="join" class="contact-section">
+                    <div class="section-container">
+                        <el-card style="background: rgba(255,255,255,0.1); border: none;">
+                            <div style="text-align: center; color: white;">
+                                <h2 style="font-size: 2.5rem; margin-bottom: 1rem;">加入我们</h2>
+                                <p style="font-size: 1.2rem; margin-bottom: 2rem; opacity: 0.9;">
+                                    开启你的大数据技术之旅，与优秀的团队一起成长
+                                </p>
+                                <el-button type="success" size="large" round @click="showJoinDialog = true">
+                                    <el-icon><user-filled-icon /></el-icon>
+                                    立即报名
+                                </el-button>
+                            </div>
+                        </el-card>
+                    </div>
+                </section>
+            </div>
+
+            <!-- 图片灯箱对话框 -->
+            <el-dialog 
+                v-model="lightboxVisible" 
+                :width="'80%'"
+                center
+                :show-close="false"
+                :modal-click-to-close="true">
+                <img :src="currentLightboxImage.src" :alt="currentLightboxImage.alt" style="width: 100%; max-height: 70vh; object-fit: contain;">
+                <template #footer>
+                    <span>{{ currentLightboxImage.caption }}</span>
+                </template>
+            </el-dialog>
+
+            <!-- 加入对话框 -->
+            <el-dialog v-model="showJoinDialog" title="加入大数据项目组" width="500px" center>
+                <el-form :model="joinForm" label-width="80px">
+                    <el-form-item label="姓名">
+                        <el-input v-model="joinForm.name" placeholder="请输入您的姓名"></el-input>
+                    </el-form-item>
+                    <el-form-item label="专业">
+                        <el-input v-model="joinForm.major" placeholder="请输入您的专业"></el-input>
+                    </el-form-item>
+                    <el-form-item label="年级">
+                        <el-select v-model="joinForm.grade" placeholder="请选择年级" style="width: 100%;">
+                            <el-option label="大一" value="freshman"></el-option>
+                            <el-option label="大二" value="sophomore"></el-option>
+                            <el-option label="大三" value="junior"></el-option>
+                            <el-option label="大四" value="senior"></el-option>
+                        </el-select>
+                    </el-form-item>
+                    <el-form-item label="联系方式">
+                        <el-input v-model="joinForm.contact" placeholder="请输入手机号或邮箱"></el-input>
+                    </el-form-item>
+                    <el-form-item label="技术方向">
+                        <el-checkbox-group v-model="joinForm.interests">
+                            <el-checkbox label="前端开发">前端开发</el-checkbox>
+                            <el-checkbox label="后端开发">后端开发</el-checkbox>
+                            <el-checkbox label="数据分析">数据分析</el-checkbox>
+                            <el-checkbox label="机器学习">机器学习</el-checkbox>
+                        </el-checkbox-group>
+                    </el-form-item>
+                </el-form>
+                <template #footer>
+                    <span>
+                        <el-button @click="showJoinDialog = false">取消</el-button>
+                        <el-button type="primary" @click="submitJoinForm">提交申请</el-button>
+                    </span>
+                </template>
+            </el-dialog>
+        </div>
+    </div>
+
+    <script>
+        const { createApp } = Vue;
+        const { ElMessage } = ElementPlus;
+
+        // 创建Vue应用实例
+        const app = createApp({
+            data() {
+                return {
+                    activeTab: 'ecommerce',
+                    activeFilter: 'all',
+                    lightboxVisible: false,
+                    showJoinDialog: false,
+                    currentLightboxImage: {},
+                    joinForm: {
+                        name: '',
+                        major: '',
+                        grade: '',
+                        contact: '',
+                        interests: []
+                    },
+                    stats: [
+                        { number: '50+', title: '项目经验' },
+                        { number: '20+', title: '技术栈' },
+                        { number: '100+', title: '团队成员' },
+                        { number: '5+', title: '获奖次数' }
+                    ],
+                    technologies: [
+                        {
+                            name: 'Hadoop 分布式存储',
+                            description: '大规模数据存储与处理的基础架构',
+                            icon: 'cpu',
+                            type: 'primary',
+                            color: '#409eff',
+                            size: 'large',
+                            level: '核心技术',
+                            tagType: 'primary'
+                        },
+                        {
+                            name: 'Spark 计算框架',
+                            description: '高性能分布式计算引擎',
+                            icon: 'lightning',
+                            type: 'success',
+                            color: '#67c23a',
+                            size: 'large',
+                            level: '核心技术',
+                            tagType: 'success'
+                        },
+                        {
+                            name: 'NoSQL 数据库',
+                            description: '灵活的非关系型数据存储方案',
+                            icon: 'coin',
+                            type: 'warning',
+                            color: '#e6a23c',
+                            size: 'large',
+                            level: '重要技术',
+                            tagType: 'warning'
+                        },
+                        {
+                            name: '机器学习算法',
+                            description: '智能数据分析与预测模型',
+                            icon: 'data-analysis',
+                            type: 'danger',
+                            color: '#f56c6c',
+                            size: 'large',
+                            level: '前沿技术',
+                            tagType: 'danger'
+                        }
+                    ],
+                    imageFilters: [
+                        { key: 'all', label: '全部' },
+                        { key: 'award', label: '奖项' },
+                        { key: 'certificate', label: '证书' },
+                        { key: 'group', label: '合影' },
+                        { key: 'scene', label: '场景' }
+                    ],
+                    images: [
+                        {
+                            id: 1,
+                            src: 'images/award.jpg.jpg',
+                            alt: '计算机大赛江苏省赛一等奖',
+                            caption: '计算机大赛江苏省赛一等奖',
+                            category: '奖项',
+                            filter: 'award',
+                            tagType: 'success'
+                        },
+                        {
+                            id: 2,
+                            src: 'images/soft_certificate.jpg.jfif',
+                            alt: '软件著作权证书',
+                            caption: '软件著作权证书',
+                            category: '证书',
+                            filter: 'certificate',
+                            tagType: 'primary'
+                        },
+                        {
+                            id: 3,
+                            src: 'images/group_photo.jpg.jpg',
+                            alt: '第十四届蓝桥杯大赛项目成员合影',
+                            caption: '第十四届蓝桥杯大赛项目成员合影',
+                            category: '合影',
+                            filter: 'group',
+                            tagType: 'warning'
+                        },
+                        {
+                            id: 4,
+                            src: 'images/work_scene.jpg.jpeg',
+                            alt: '团队开发工作场景',
+                            caption: '团队开发工作场景',
+                            category: '场景',
+                            filter: 'scene',
+                            tagType: 'info'
+                        }
+                    ],
+                    advantages: [
+                        {
+                            title: '专属学习空间',
+                            description: '拥有全组最优自习室，告别图书馆抢位烦恼。沉浸式学习环境，支持小组讨论与技术攻坚。',
+                            icon: 'house',
+                            color: '#409eff',
+                            progress: 95
+                        },
+                        {
+                            title: '项目实战机会',
+                            description: '参与前沿大数据项目开发，导师全程指导，涵盖全栈开发，前后端同步提升。',
+                            icon: 'cpu',
+                            color: '#67c23a',
+                            progress: 90
+                        },
+                        {
+                            title: '个性化发展支持',
+                            description: '考研定向指导，项目经验积累，算法研究与工程实践双路径选择，定制化成长规划。',
+                            icon: 'user',
+                            color: '#e6a23c',
+                            progress: 88
+                        }
+                    ]
+                }
+            },
+            computed: {
+                filteredImages() {
+                    if (this.activeFilter === 'all') {
+                        return this.images;
+                    }
+                    return this.images.filter(image => image.filter === this.activeFilter);
+                }
+            },
+            methods: {
+                scrollToSection(sectionId) {
+                    const element = document.getElementById(sectionId);
+                    if (element) {
+                        element.scrollIntoView({ behavior: 'smooth' });
+                    }
+                },
+                openLightbox(image) {
+                    this.currentLightboxImage = image;
+                    this.lightboxVisible = true;
+                },
+                submitJoinForm() {
+                    if (!this.joinForm.name || !this.joinForm.contact) {
+                        ElMessage.warning('请填写必要信息');
+                        return;
+                    }
+                    ElMessage.success('申请已提交，我们会尽快联系您！');
+                    this.showJoinDialog = false;
+                    this.resetJoinForm();
+                },
+                resetJoinForm() {
+                    this.joinForm = {
+                        name: '',
+                        major: '',
+                        grade: '',
+                        contact: '',
+                        interests: []
+                    };
+                }
+            }
+        });
+
+        // 注册所有图标组件
+        if (typeof ElementPlusIconsVue !== 'undefined') {
+            for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
+                app.component(key, component);
+            }
+        }
+
+        // 使用Element Plus并挂载应用
+        app.use(ElementPlus).mount('#app');
+    </script>
+</body>
+</html>
